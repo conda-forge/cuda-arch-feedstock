@@ -3,8 +3,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cuda_arch_version:
-- '11.0'
+- '5.0'
 cuda_compiler_version:
 - '99.9'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma10
+first_supported_toolkit:
+- '12'
+zip_keys:
+- - cuda_arch_version
+  - first_supported_toolkit
