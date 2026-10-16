@@ -14,21 +14,24 @@ source:
 
 build:
   # Add new versions to conda_build_config.yaml; only update the build number if
-  # dependencies change.
+  # dependencies change. This build number should remain less than or equal to the build
+  # number on the main branch.
   number: 2
   noarch: generic
+  string: cuda${{ first_supported_toolkit }}_h${{ hash }}_${{ build_number }}
 
 requirements:
   run_exports:
     - cuda-arch >=${{ cuda_arch_version }}
   run:
-    # Originally this package proposed to use run_constrained like cuda-version. This would
-    # have allowed build-runners to not have the __cuda_arch virtual package, but because of
-    # a bug in every conda package manager where run_constraints on virtual packages were
-    # ignored, we must use run instead to ensure that the constraint is followed. It also
-    # prevents users without __cuda_arch from installing this package which could result in
-    # segmentation faults if their device is unsupported.
-    - __cuda_arch >=${{ cuda_arch_version }}
+    # This is a special variant of the cuda-arch package which depends on __cuda and
+    # cuda-version instead of __cuda_arch. Its purpose is to round some hard edges in the
+    # transition period when packages start to depend on __cuda_arch, but conda packge
+    # managers have not yet implemented support for __cuda_arch. It allows users without
+    # __cuda_arch to install cuda-arch by constraining them to the oldest arch supported by
+    # the cuda-version of their environment.
+    - __cuda
+    - cuda-version ${{ first_supported_toolkit }}.*
 
 tests:
   - script:
