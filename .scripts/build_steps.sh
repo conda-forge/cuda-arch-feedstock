@@ -109,6 +109,11 @@ echo Building recipe
 #   - none vs. --target-platform
 #   - --extra-meta a=b c=d vs. --extra-meta a=b --extra-meta c=d
 
+# These overrides were added by hand and are unique to this feedstock. They are needed
+# because the CI is no longer designed to have __cuda set, but __cuda_arch not set.
+export CONDA_OVERRIDE_CUDA="13.0"
+export CONDA_OVERRIDE_CUDA_ARCH=""
+
 rattler-build build \
     --recipe "${RECIPE_ROOT}" \
     -m "${CONFIG_FILE}" \
