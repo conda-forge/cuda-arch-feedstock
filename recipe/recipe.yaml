@@ -16,7 +16,7 @@ build:
   # Add new versions to conda_build_config.yaml; only update the build number if
   # dependencies change. This build number should remain less than or equal to the build
   # number on the main branch.
-  number: 2
+  number: 3
   noarch: generic
   string: cuda${{ first_supported_toolkit }}_h${{ hash }}_${{ build_number }}
 
@@ -32,6 +32,11 @@ requirements:
     # the cuda-version of their environment.
     - __cuda
     - cuda-version ${{ first_supported_toolkit }}.*
+  run_constraints:
+    # If __cuda_arch IS available, DO NOT use this variant. This constraint prevents the
+    # solver from promoting cuda-arch<7.5 devices with a 580-series driver to CUDA 13 and
+    # cuda-arch=7.5
+    - __cuda_arch <0.0a0
 
 tests:
   - script:
