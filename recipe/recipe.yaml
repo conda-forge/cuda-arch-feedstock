@@ -1,12 +1,6 @@
-context:
-  # This definition exists so that conda-smithy includes cuda_compiler_version in the
-  # variants config, so that conda-forge-ci-setup set CONDA_OVERRIDE_CUDA and
-  # CONDA_OVERRIDE_CUDA_ARCH
-  cuda_version: ${{ cuda_compiler_version }}
-
 package:
   name: cuda-arch
-  version: ${{ cuda_arch_version }}
+  version: ${{ arch_version }}
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_documentation/LICENSE.txt
@@ -22,7 +16,7 @@ build:
 
 requirements:
   run_exports:
-    - cuda-arch >=${{ cuda_arch_version }}
+    - cuda-arch >=${{ arch_version }}
   run:
     # This is a special variant of the cuda-arch package which depends on __cuda and
     # cuda-version instead of __cuda_arch. Its purpose is to round some hard edges in the
