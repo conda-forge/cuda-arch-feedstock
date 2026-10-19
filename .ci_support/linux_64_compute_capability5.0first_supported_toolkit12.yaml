@@ -1,13 +1,13 @@
-arch_version:
-- '7.5'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+compute_capability:
+- '5.0'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma10
 first_supported_toolkit:
-- '13'
+- '12'
 zip_keys:
-- - arch_version
+- - compute_capability
   - first_supported_toolkit

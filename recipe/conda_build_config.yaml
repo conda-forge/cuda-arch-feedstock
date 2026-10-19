@@ -1,4 +1,4 @@
-arch_version:
+compute_capability:
   - 5.0
   - 7.5
 
@@ -8,5 +8,5 @@ first_supported_toolkit:
 
 zip_keys:
   -
-    - arch_version
+    - compute_capability
     - first_supported_toolkit

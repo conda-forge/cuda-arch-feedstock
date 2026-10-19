@@ -1,6 +1,6 @@
 package:
   name: cuda-arch
-  version: ${{ arch_version }}
+  version: ${{ compute_capability }}
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_documentation/LICENSE.txt
@@ -16,7 +16,7 @@ build:
 
 requirements:
   run_exports:
-    - cuda-arch >=${{ arch_version }}
+    - cuda-arch >=${{ compute_capability }}
   run:
     # This is a special variant of the cuda-arch package which depends on __cuda and
     # cuda-version instead of __cuda_arch. Its purpose is to round some hard edges in the
